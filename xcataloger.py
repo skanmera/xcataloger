@@ -87,7 +87,7 @@ def draw_logo(image, logo, color):
     image_size = iw if iw > ih else ih
     font_size = 1
     while True:
-        font = ImageFont.truetype('arial.ttf', font_size)
+        font = ImageFont.truetype(os.path.join('fonts', 'arial.ttf'), font_size)
         tw, th = draw.textsize(logo, font)
         max_size = tw if tw > th else th
         if max_size < image_size * 0.3:
