@@ -167,7 +167,7 @@
     "orientation": "landscape",
     "scale": "1x",
     "width": 1024,
-    "height": 768 
+    "height": 748 
   },
   "iPad Landscape Without Status Bar iOS5,6 2x": {
     "extent": "to-status-bar",
@@ -175,7 +175,7 @@
     "orientation": "landscape",
     "scale": "2x",
     "width": 2048,
-    "height": 1536
+    "height": 1496 
   },
   "iPad Landscape iOS5,6 1x": {
     "extent": "full-screen",
