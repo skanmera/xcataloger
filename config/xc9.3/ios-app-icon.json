@@ -1,0 +1,92 @@
+{
+  "iPhone Notification iOS7-11 20pt 2x": {
+    "idiom" : "iphone",
+    "size" : "20x20",
+    "scale" : "2x"
+  },
+  "iPhone Notification iOS7-11 20pt 3x": {
+    "idiom" : "iphone",
+    "size" : "20x20",
+    "scale" : "3x"
+  },
+  "iPhone Spotlight-iOS5,6 Settings-iOS5-11 29pt 2x": {
+    "idiom" : "iphone",
+    "size" : "29x29",
+    "scale" : "2x"
+  },
+  "iPhone Spotlight-iOS5,6 Settings-iOS5-11 29pt 3x": {
+    "idiom" : "iphone",
+    "size" : "29x29",
+    "scale" : "3x"
+  },
+  "iPhone Spotlight iOS7-11 40pt 2x": {
+    "idiom" : "iphone",
+    "size" : "40x40",
+    "scale" : "2x"
+  },
+  "iPhone Spotlight iOS7-11 40pt 3x": {
+    "idiom" : "iphone",
+    "size" : "40x40",
+    "scale" : "3x"
+  },
+  "iPhone App iOS7-11 60pt 2x": {
+    "idiom" : "iphone",
+    "size" : "60x60",
+    "scale" : "2x"
+  },
+  "iPhone App iOS7-11 60pt 3x": {
+    "idiom" : "iphone",
+    "size" : "60x60",
+    "scale" : "3x"
+  },
+  "iPad Notifications iOS7-11 20pt 1x": {
+    "idiom" : "ipad",
+    "size" : "20x20",
+    "scale" : "1x"
+  },
+  "iPad Notifications iOS7-11 20pt 2x": {
+    "idiom" : "ipad",
+    "size" : "20x20",
+    "scale" : "2x"
+  },
+  "iPad Settings iOS5-11 29pt 1x": {
+    "idiom" : "ipad",
+    "size" : "29x29",
+    "scale" : "1x"
+  },
+  "iPad Settings iOS5-11 29pt 2x": {
+    "idiom" : "ipad",
+    "size" : "29x29",
+    "scale" : "2x"
+  },
+  "iPad Spotlight iOS7-11 40pt 1x": {
+    "idiom" : "ipad",
+    "size" : "40x40",
+    "scale" : "1x"
+  },
+  "iPad Spotlight iOS7-11 40pt 2x": {
+    "idiom" : "ipad",
+    "size" : "40x40",
+    "scale" : "2x"
+  },
+  "iPad App iOS7-11 76pt 1x": {
+    "idiom" : "ipad",
+    "size" : "76x76",
+    "scale" : "1x"
+  },
+  "iPad App iOS7-11 76pt 2x": {
+    "idiom" : "ipad",
+    "size" : "76x76",
+    "scale" : "2x"
+  },
+  "iPad Pro App iOS9-11 83.5pt 2x": {
+    "idiom" : "ipad",
+    "size" : "83.5x83.5",
+    "scale" : "2x"
+  },
+  "App Store iOS 1024pt 1x": {
+    "idiom" : "ios-marketing",
+    "size" : "1024x1024",
+    "scale" : "1x"
+  }
+}
