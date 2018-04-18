@@ -164,7 +164,7 @@ def __convert(option):
             print('Converted "{}"'.format(path))
 
 
-def __set_images(option):
+def __set(option):
     # Load /config/xc[Xcode Version]/[app-icons|launch-images].json """
     configs = load_json(os.path.join(option.config))
 
@@ -184,13 +184,19 @@ def __set_images(option):
         config = matches.popitem()
         for image in images:
             if image.equal_size(get_width(config[1]), get_height(config[1])):
-                filename = '{}.png'.format(config[0].replace('\\', '').replace('"', '').replace(' ', '_'))
-                if option.format:
-                    filename = build_file_name(config[1], option.format)
+
+                filename = os.path.basename(image.path)
+                if not option.no_rename:
+                    if option.format:
+                        filename = build_file_name(config[1], option.format)
+                    else:
+                        filename = '{}.png'.format(config[0].replace('\\', '').replace('"', '').replace(' ', '_'))
+
                 output_path = os.path.join(option.image_assets, filename)
                 shutil.copy(image.path, output_path)
                 image_config['filename'] = filename
                 print('Set "{}" to "{}"'.format(image.path, output_path))
+
     output_contents_json(contents, contents_json_path)
 
 
@@ -199,15 +205,18 @@ def __add_make_command(subparsers):
     make_command_parser.formatter_class = argparse.RawTextHelpFormatter
     make_command_parser.add_argument('-c', '--config',
                                      required=True,
-                                     help='specify json from /config/xc[Xcode Version]/')
+                                     help='specify json from /config/xc[Xcode Version]/\n')
     make_command_parser.add_argument('-o', '--output',
-                                     help='output directory. default: ./images/')
+                                     help='output directory.\n'
+                                          'default: ./images/\n')
     make_command_parser.add_argument('-C', '--color',
-                                     help='specify color with format R,G,B ex: --color=255,255,255')
+                                     help='specify color with format R,G,B'
+                                          ' ex: --color=255,255,255\n')
     make_command_parser.add_argument('-l', '--logo',
-                                     help='draw logo on center of image')
+                                     help='draw logo on center of image\n')
     make_command_parser.add_argument('--logo-color',
-                                     help='specify color of logo with format R,G,B')
+                                     help='specify color of logo with format R,G,B\n'
+                                          'ex: --logo-color=0,0,0\n')
 
 
 def __add_convert_command(subparsers):
@@ -215,21 +224,22 @@ def __add_convert_command(subparsers):
     make_command_parser.formatter_class = argparse.RawTextHelpFormatter
     make_command_parser.add_argument('-s', '--src',
                                      required=True,
-                                     help='specify source image')
+                                     help='specify source image\n')
     make_command_parser.add_argument('-c', '--config',
                                      required=True,
-                                     help='specify json from /config/xc[Xcode Version]/')
+                                     help='specify json from /config/xc[Xcode Version]/\n')
     make_command_parser.add_argument('-O', '--orientation',
-                                     help='specify src image orientation'
-                                          'ex: --orientation=landscape'
-                                          'default: portrait')
+                                     help='specify src image orientation\n'
+                                          'ex: --orientation=landscape\n'
+                                          'default: portrait\n')
     make_command_parser.add_argument('-r', '--rotate',
-                                     help='specify rotation'
-                                          'require: --orientation'
-                                          'ex: --rotate=left or --rotate==right'
-                                          'default: None')
+                                     help='specify rotation\n'
+                                          'require: --orientation\n'
+                                          'ex: --rotate=left or --rotate==right\n'
+                                          'default: None\n')
     make_command_parser.add_argument('-o', '--output',
-                                     help='output directory. default: ./images/')
+                                     help='output directory.\n'
+                                          'default: ./images/\n')
     make_command_parser.add_argument('-i', '--ignore-aspect-ratio',
                                      action='store_true',
                                      default=False,
@@ -241,23 +251,27 @@ def __add_set_command(subparsers):
     set_command_parser.formatter_class = argparse.RawTextHelpFormatter
     set_command_parser.add_argument('-s', '--src-dir',
                                     required=True,
-                                    help='specify directory contains images to set')
+                                    help='specify directory contains images to set\n')
     set_command_parser.add_argument('-i', '--image-assets',
                                     required=True,
-                                    help='specify app-icons/launch-images directory contains "Contents.json"')
+                                    help='specify app-icons/launch-images directory contains "Contents.json"\n')
     set_command_parser.add_argument('-c', '--config',
                                     required=True,
-                                    help='specify json from /config/xc[Xcode Version]/')
+                                    help='specify json from /config/xc[Xcode Version]/\n')
+    set_command_parser.add_argument('-n', '--no-rename',
+                                    action='store_true',
+                                    default=False,
+                                    help='copy to ImageAssets and set to "Contents.json" without rename\n')
     set_command_parser.add_argument('-f', '--format',
                                     help='specify file name format\n'
                                          'ex: --format=<idiom>_<orientation>_<width>x<height>.png\n'
-                                         '    --> iphone_portrait_640x960.png\n\n'
-                                         'available: idiom orientation subtype minimum-system-version\n'
-                                         '                 extent scale width height')
+                                         '    --> iphone_portrait_640x960.png\n'
+                                         'available: idiom, orientation, subtype, minimum-system-version,'
+                                         ', extent, scale, width, height\n')
     set_command_parser.add_argument('-k', '--keep',
                                     action='store_true',
                                     default=False,
-                                    help='keep old files')
+                                    help='keep old files\n')
 
 
 def __parse_args():
@@ -277,7 +291,7 @@ def main():
     elif args.command == 'convert':
         __convert(args)
     elif args.command == 'set':
-        __set_images(args)
+        __set(args)
 
 
 if __name__ == '__main__':
