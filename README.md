@@ -1,10 +1,8 @@
 # xcataloger
-CLI tool for Images.xcassets
-
-![](https://github.com/skanmera/media/blob/master/xcataloger/screenshot.png)
+CLI tool for Assets.xcassets
 
 # Description
-___`xcataloger`___ is CLI tool for creating AppIcons/LaunchImages and registering them to Images.xcassets.
+___`xcataloger`___ is CLI tool for creating AppIcons/LaunchImages and registering them to Assets.xcassets.
 
 # Install
 
@@ -17,7 +15,6 @@ $ git clone https://github.com/skanmera/xcataloger.git
 ### Dependencies
 
 ```
-$ cd xcataloger
 $ pip install pillow
 ```
 
@@ -46,10 +43,13 @@ optional arguments:
                         ex: --logo-color=0,0,0
 ```
 
-### example:
+### example
+
 ```
 $ python xcataloger.py make --config=config/xc9.3/ios-launch-image.json --color=0,0,255 -logo=SAMPLE --logo-color=255,255,255
 ```
+
+![](https://github.com/skanmera/media/blob/master/xcataloger/screenshot03.png)
 
 ## Convert
 
@@ -80,14 +80,17 @@ optional arguments:
                         ignore aspect ratio
 ```
 
-### example:
+### example
+
 ```
-$ python xcataloger.py convert --src=source.png --config=config/xc9.3/ios-launch-image.json
+$ python xcataloger.py convert --src=source.png --config=config/xc9.3/ios-launch-image.json --orientation=landscape --rotate=right
 ```
+
+![](https://github.com/skanmera/media/blob/master/xcataloger/screenshot02.png)
 
 ## Register
 
-___Register command copy images to Images.xcassets(AppIcons.appiconset/LaunchImage.launchimage) from source directory and overwrite 'filename' in Contents.json.___
+___Register command copy images to Assets.xcassets(AppIcons.appiconset/LaunchImage.launchimage) from source directory and overwrite 'filename' in Contents.json.___
 
 ```
 usage: xcataloger.py register [-h] -s SRC_DIR -i IMAGE_ASSETS -c CONFIG [-n]
@@ -96,12 +99,12 @@ usage: xcataloger.py register [-h] -s SRC_DIR -i IMAGE_ASSETS -c CONFIG [-n]
 optional arguments:
   -h, --help            show this help message and exit
   -s SRC_DIR, --src-dir SRC_DIR
-                        specify directory contains images to register to Images.xcassets
+                        specify directory contains images to register to Assets.xcassets
   -i IMAGE_ASSETS, --image-assets IMAGE_ASSETS
                         specify directory contains "Contents.json"
   -c CONFIG, --config CONFIG
                         specify json from /config/xc[Xcode Version]/
-  -n, --no-rename       copy and register to Images.xcassets without rename
+  -n, --no-rename       copy and register to Assets.xcassets without rename
   -f FORMAT, --format FORMAT
                         specify file name format
                         ex: --format=<idiom>_<orientation>_<width>x<height>.png
@@ -111,10 +114,14 @@ optional arguments:
 
 ```
 
-### example:
+### example
+
 ```
-$ python xcataloger.py register --src-dir=source --image-assets=path/to/Images.xcassets/LaunchImage.launchimage --config=config/xc9.3/ios-launch-image.json
+$ python xcataloger.py register --src-dir=source --image-assets=path/to/Assets.xcassets/LaunchImage.launchimage --config=config/xc9.3/ios-launch-image.json
 ```
+
+![](https://github.com/skanmera/media/blob/master/xcataloger/screenshot04.png)
+![](https://github.com/skanmera/media/blob/master/xcataloger/screenshot01.png)
 
 # License
 [MIT](https://github.com/skanmera/xcataloger/blob/master/LICENSE)
