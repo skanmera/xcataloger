@@ -164,7 +164,7 @@ def __convert(option):
             print('Converted "{}"'.format(path))
 
 
-def __set(option):
+def __register(option):
     # Load /config/xc[Xcode Version]/[app-icons|launch-images].json """
     configs = load_json(os.path.join(option.config))
 
@@ -201,77 +201,77 @@ def __set(option):
 
 
 def __add_make_command(subparsers):
-    make_command_parser = subparsers.add_parser('make')
-    make_command_parser.formatter_class = argparse.RawTextHelpFormatter
-    make_command_parser.add_argument('-c', '--config',
-                                     required=True,
-                                     help='specify json from /config/xc[Xcode Version]/\n')
-    make_command_parser.add_argument('-o', '--output',
-                                     help='output directory.\n'
-                                          'default: ./images/\n')
-    make_command_parser.add_argument('-C', '--color',
-                                     help='specify color with format R,G,B'
-                                          ' ex: --color=255,255,255\n')
-    make_command_parser.add_argument('-l', '--logo',
-                                     help='draw logo on center of image\n')
-    make_command_parser.add_argument('--logo-color',
-                                     help='specify color of logo with format R,G,B\n'
-                                          'ex: --logo-color=0,0,0\n')
+    parser = subparsers.add_parser('make')
+    parser.formatter_class = argparse.RawTextHelpFormatter
+    parser.add_argument('-c', '--config',
+                        required=True,
+                        help='specify json from /config/xc[Xcode Version]/\n')
+    parser.add_argument('-o', '--output',
+                        help='output directory.\n'
+                             'default: ./images/\n')
+    parser.add_argument('-C', '--color',
+                        help='specify color with format R,G,B'
+                             ' ex: --color=255,255,255\n')
+    parser.add_argument('-l', '--logo',
+                        help='draw logo on center of image\n')
+    parser.add_argument('--logo-color',
+                        help='specify color of logo with format R,G,B\n'
+                             'ex: --logo-color=0,0,0\n')
 
 
 def __add_convert_command(subparsers):
-    make_command_parser = subparsers.add_parser('convert')
-    make_command_parser.formatter_class = argparse.RawTextHelpFormatter
-    make_command_parser.add_argument('-s', '--src',
-                                     required=True,
-                                     help='specify source image\n')
-    make_command_parser.add_argument('-c', '--config',
-                                     required=True,
-                                     help='specify json from /config/xc[Xcode Version]/\n')
-    make_command_parser.add_argument('-O', '--orientation',
-                                     help='specify src image orientation\n'
-                                          'ex: --orientation=landscape\n'
-                                          'default: portrait\n')
-    make_command_parser.add_argument('-r', '--rotate',
-                                     help='specify rotation\n'
-                                          'require: --orientation\n'
-                                          'ex: --rotate=left or --rotate==right\n'
-                                          'default: None\n')
-    make_command_parser.add_argument('-o', '--output',
-                                     help='output directory.\n'
-                                          'default: ./images/\n')
-    make_command_parser.add_argument('-i', '--ignore-aspect-ratio',
-                                     action='store_true',
-                                     default=False,
-                                     help='ignore aspect ratio')
+    parser = subparsers.add_parser('convert')
+    parser.formatter_class = argparse.RawTextHelpFormatter
+    parser.add_argument('-s', '--src',
+                        required=True,
+                        help='specify source image\n')
+    parser.add_argument('-c', '--config',
+                        required=True,
+                        help='specify json from /config/xc[Xcode Version]/\n')
+    parser.add_argument('-O', '--orientation',
+                        help='specify src image orientation\n'
+                             'ex: --orientation=landscape\n'
+                             'default: portrait\n')
+    parser.add_argument('-r', '--rotate',
+                        help='specify rotation\n'
+                             'require: --orientation\n'
+                             'ex: --rotate=left or --rotate==right\n'
+                             'default: None\n')
+    parser.add_argument('-o', '--output',
+                        help='output directory.\n'
+                             'default: ./images/\n')
+    parser.add_argument('-i', '--ignore-aspect-ratio',
+                        action='store_true',
+                        default=False,
+                        help='ignore aspect ratio')
 
 
-def __add_set_command(subparsers):
-    set_command_parser = subparsers.add_parser('set')
-    set_command_parser.formatter_class = argparse.RawTextHelpFormatter
-    set_command_parser.add_argument('-s', '--src-dir',
-                                    required=True,
-                                    help='specify directory contains images to set\n')
-    set_command_parser.add_argument('-i', '--image-assets',
-                                    required=True,
-                                    help='specify app-icons/launch-images directory contains "Contents.json"\n')
-    set_command_parser.add_argument('-c', '--config',
-                                    required=True,
-                                    help='specify json from /config/xc[Xcode Version]/\n')
-    set_command_parser.add_argument('-n', '--no-rename',
-                                    action='store_true',
-                                    default=False,
-                                    help='copy to ImageAssets and set to "Contents.json" without rename\n')
-    set_command_parser.add_argument('-f', '--format',
-                                    help='specify file name format\n'
-                                         'ex: --format=<idiom>_<orientation>_<width>x<height>.png\n'
-                                         '    --> iphone_portrait_640x960.png\n'
-                                         'available: idiom, orientation, subtype, minimum-system-version,'
-                                         ', extent, scale, width, height\n')
-    set_command_parser.add_argument('-k', '--keep',
-                                    action='store_true',
-                                    default=False,
-                                    help='keep old files\n')
+def __add_register_command(subparsers):
+    parser = subparsers.add_parser('register')
+    parser.formatter_class = argparse.RawTextHelpFormatter
+    parser.add_argument('-s', '--src-dir',
+                        required=True,
+                        help='specify directory contains images to register to Assets.xcassets\n')
+    parser.add_argument('-i', '--image-assets',
+                        required=True,
+                        help='specify directory contains "Contents.json"\n')
+    parser.add_argument('-c', '--config',
+                        required=True,
+                        help='specify json from /config/xc[Xcode Version]/\n')
+    parser.add_argument('-n', '--no-rename',
+                        action='store_true',
+                        default=False,
+                        help='copy and register to Assets.xcassets without rename\n')
+    parser.add_argument('-f', '--format',
+                        help='specify file name format\n'
+                             'ex: --format=<idiom>_<orientation>_<width>x<height>.png\n'
+                             '    --> iphone_portrait_640x960.png\n'
+                             'available: idiom, orientation, subtype, minimum-system-version,'
+                             ', extent, scale, width, height\n')
+    parser.add_argument('-k', '--keep',
+                        action='store_true',
+                        default=False,
+                        help='keep old files\n')
 
 
 def __parse_args():
@@ -280,7 +280,7 @@ def __parse_args():
     subparsers.required = True
     __add_make_command(subparsers)
     __add_convert_command(subparsers)
-    __add_set_command(subparsers)
+    __add_register_command(subparsers)
     return parser.parse_args()
 
 
@@ -290,8 +290,8 @@ def main():
         __make(args)
     elif args.command == 'convert':
         __convert(args)
-    elif args.command == 'set':
-        __set(args)
+    elif args.command == 'register':
+        __register(args)
 
 
 if __name__ == '__main__':
